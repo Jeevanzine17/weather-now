@@ -1,0 +1,322 @@
+:root {
+  --bg-top: #4b5ea7;
+  --bg-bottom: #1a1f36;
+
+  --card: rgba(255,255,255,0.12);
+  --accent: #ffb703;
+  --text: #ffffff;
+  --muted: #c7d0ff;
+
+  --transition-speed: 1.4s;
+}
+
+
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(
+    circle at top,
+    var(--bg-top),
+    var(--bg-bottom)
+  );
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  transition:
+    background var(--transition-speed) ease,
+    color 0.6s ease;
+}
+
+
+
+/* ===============================
+   HEADER
+================================ */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#unitToggle {
+  background: var(--card);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* ===============================
+   LAYOUT
+================================ */
+.container {
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.search {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.search-wrapper input {
+  width: 260px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+
+.search-wrapper button {
+  padding: 14px 22px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===============================
+   AUTOCOMPLETE
+================================ */
+.suggestions {
+  position: absolute;
+  top: 54px;
+  width: 260px;
+  background: #11173a;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.suggestions div {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.suggestions div:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ===============================
+   GRID
+================================ */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+}
+
+/* ===============================
+   CURRENT CARD
+================================ */
+.current-card {
+  background: linear-gradient(135deg, #3a5cff, #6c8cff);
+  border-radius: 22px;
+  padding: 22px 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.temp {
+  font-size: 58px;
+  font-weight: 600;
+}
+
+/* ===============================
+   METRICS (SPACING FIXED)
+================================ */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;          /* more breathing room */
+  margin: 28px 0;
+}
+
+.metrics div {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 16px;
+  line-height: 1.5;
+}
+
+.metrics span {
+  display: block;
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+
+.metrics strong {
+  font-size: 18px;
+}
+
+/* ===============================
+   DAILY
+================================ */
+.daily {
+  display: grid;
+  grid-template-columns: repeat(7,1fr);
+  gap: 14px;
+}
+
+.daily div {
+  background: var(--card);
+  padding: 14px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+/* ===============================
+   HOURLY
+================================ */
+.hourly {
+  background: var(--card);
+  border-radius: 22px;
+  padding: 16px;
+}
+
+.hourly td {
+  padding: 10px 6px;
+  font-size: 14px;
+}
+
+/* ===============================
+   CANVAS
+================================ */
+#weatherCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===============================
+   WEATHER STATES (ANIMATION HOOKS)
+================================ */
+body.sunny {
+  background: radial-gradient(circle at top, #1a237e, #0b1026);
+}
+
+body.cloudy {
+  background: radial-gradient(circle at top, #1c2348, #0b1026);
+}
+
+body.rain {
+  background: radial-gradient(circle at top, #121833, #06091a);
+}
+
+
+/* ===============================
+   DAY / NIGHT THEMES
+================================ */
+
+/* SUNNY DAY */
+body.sunny.day {
+  --bg-top: #6ea8ff;
+  --bg-bottom: #2b356b;
+  --accent: #ffb703;
+}
+
+/* SUNNY NIGHT */
+body.sunny.night {
+  --bg-top: #2d3561;
+  --bg-bottom: #0f1226;
+  --accent: #ffd166;
+}
+
+/* CLOUDY DAY */
+body.cloudy.day {
+  --bg-top: #8a94b8;
+  --bg-bottom: #2a2f4f;
+  --accent: #bcd4ff;
+}
+
+/* CLOUDY NIGHT */
+body.cloudy.night {
+  --bg-top: #3a3f5c;
+  --bg-bottom: #11142a;
+  --accent: #aab6ff;
+}
+
+/* RAIN DAY */
+body.rain.day {
+  --bg-top: #5b6b85;
+  --bg-bottom: #1e2538;
+  --accent: #7dd3fc;
+}
+
+/* RAIN NIGHT */
+body.rain.night {
+  --bg-top: #1f2944;
+  --bg-bottom: #06081a;
+  --accent: #60a5fa;
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .daily {
+    grid-template-columns: repeat(4,1fr);
+  }
+
+  .temp {
+    font-size: 48px;
+  }
+}
+.current-card,
+.metrics div,
+.daily div,
+.hourly {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.metrics div:hover,
+.daily div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+.temp img {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
