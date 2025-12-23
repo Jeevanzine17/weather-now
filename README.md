@@ -141,5 +141,5 @@ weather-now/
 ## 👤 Author
 
 **Jivan Zine**
-Weather Now — Personal Project
+Weather Now Personal Project
 
